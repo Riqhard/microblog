@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>To-Do List</h1>
+    
+<form action="/add" method="POST">
+    <input type="text" name="title" placeholder="Add a new task" required>
+    <button type="submit">Add Task</button>
+</form>
+
+<h1>Tasks</h1>
+<ul>
+    {% for task in tasks %}
+        <li>
+            {% if task.complete %}
+                <del>{{ task.title }}</del>
+            {% else %}
+                {{ task.title }}
+            {% endif %}
+            <a href="/complete/{{ task.id }}">[Complete]</a>
+            <a href="/delete/{{ task.id }}" onclick="return confirm('Are you sure?')">[Delete]</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
